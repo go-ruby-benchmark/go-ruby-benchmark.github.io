@@ -1,0 +1,31 @@
+baseURL = "https://go-ruby-benchmark.github.io/"
+title = "go-ruby-benchmark"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[params.phases]]
+  name = "Tms value type"
+  status = "ready"
+  blurb = "`Benchmark::Tms`: `utime`, `stime`, `cutime`, `cstime`, `real`, the derived `total = utime+stime+cutime+cstime`, and a `label`, with `ToA` / `ToS` and MRI-exact constructor semantics (a sum's label clears to `\"\"`)."
+[[params.phases]]
+  name = "Memberwise & scalar arithmetic"
+  status = "ready"
+  blurb = "`Add` / `Sub` / `Mul` / `Div` against another `Tms`, and the scalar forms applied to all five fields (real included) — exactly as MRI's `Tms#+ - * /` do."
+[[params.phases]]
+  name = "Format directives"
+  status = "ready"
+  blurb = "The Benchmark `%`-extensions on top of printf: `%u` user, `%y` system, `%U` / `%Y` children's, `%t` total, `%r` real (parenthesised), `%n` label — each preserving its flag/width/precision run, with `%%` collapse and surplus-arg drop matching `String#%`."
+[[params.phases]]
+  name = "Report layout"
+  status = "ready"
+  blurb = "`CAPTION`, label left-justification, and the full `bm(width)`, `bmbm` (rehearsal banner + total footer + take table), and general `benchmark(caption, width, format, *labels)` tables with trailing summary lines — all pure functions over `Tms`."
+[[params.phases]]
+  name = "Injected clock"
+  status = "ready"
+  blurb = "`MeasureWith`, `RealtimeWith`, `MsWith`, and `Tms.AddWith` take a `Clock` seam (`Process.times` + `clock_gettime(CLOCK_MONOTONIC)`): the host supplies the real process clock, tests a deterministic one, so every formatted line is reproducible."
+[[params.phases]]
+  name = "Differential oracle & coverage"
+  status = "ready"
+  blurb = "The same fixed numbers and a patched, deterministic clock fed to the system `ruby`'s `Benchmark` and compared byte-for-byte; 100% coverage, gofmt + go vet clean, green across all six 64-bit Go arches and three OSes."
